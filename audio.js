@@ -388,8 +388,6 @@ function downloadBook (bundle, name, download, callback) {
       return callback(error)
     }
 
-    console.log(download);
-
     var fileName = util.format('%s%s', name.trim(), getExtension(download.name))
     var filePath = path.resolve(downloadPath, sanitizeFilename(fileName))
 
