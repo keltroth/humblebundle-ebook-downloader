@@ -23,7 +23,7 @@
     "inquirer": "^5.1.0",
     "mkdirp": "^0.5.1",
     "nasa-keypath": "0.0.1",
-    "nightmare": "^3.0.0",
+    "nightmare": "^3.0.1",
     "request": "^2.85.0",
     "sanitize-filename": "^1.6.1"
   },
