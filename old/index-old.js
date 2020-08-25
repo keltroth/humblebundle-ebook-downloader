@@ -2,7 +2,7 @@
 
 const async = require('async')
 const commander = require('commander')
-const packageInfo = require('./package.json')
+const packageInfo = require('../package.json')
 const Nightmare = require('nightmare')
 const request = require('request')
 const Breeze = require('breeze')
@@ -20,7 +20,7 @@ const fs = require('fs')
 const os = require('os')
 const userAgent = util.format('Humblebundle-Ebook-Downloader/%s', packageInfo.version)
 
-const SUPPORTED_FORMATS = ['mp3', 'flac']
+const SUPPORTED_FORMATS = ['epub', 'mobi', 'pdf', 'pdf_hd', 'cbz']
 const ALLOWED_FORMATS = SUPPORTED_FORMATS.concat(['all']).sort()
 
 commander
@@ -259,7 +259,7 @@ function fetchOrders (next, session, gamekey) {
         }
 
         var filteredOrders = orders.filter((order) => {
-          return flatten(keypath.get(order, 'subproducts.[].downloads.[].platform')).indexOf('audio') !== -1
+          return flatten(keypath.get(order, 'subproducts.[].downloads.[].platform')).indexOf('ebook') !== -1
         })
 
         next(null, filteredOrders, session)
@@ -388,7 +388,7 @@ function downloadBook (bundle, name, download, callback) {
       return callback(error)
     }
 
-    var fileName = util.format('%s%s', name.trim(), getExtension(download.name))
+    var fileName = util.format('%s%s', name.trim(), getExtension(normalizeFormat(download.name)))
     var filePath = path.resolve(downloadPath, sanitizeFilename(fileName))
 
     checkSignatureMatch(filePath, download, (error, matches) => {
@@ -432,7 +432,7 @@ function downloadBundles (next, bundles) {
 
     for (var subproduct of bundle.subproducts) {
       var filteredDownloads = subproduct.downloads.filter((download) => {
-        return download.platform === 'audio'
+        return download.platform === 'ebook'
       })
 
       var downloadStructs = flatten(keypath.get(filteredDownloads, '[].download_struct'))

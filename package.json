@@ -2,9 +2,9 @@
   "name": "humblebundle-ebook-downloader",
   "version": "1.0.10",
   "license": "Unlicense",
-  "main": "index.js",
+  "main": "old/index-old.js",
   "bin": {
-    "humblebundle-ebook-downloader": "index.js"
+    "humblebundle-ebook-downloader": "old/index-old.js"
   },
   "scripts": {
     "test": "standard"
@@ -24,6 +24,7 @@
     "mkdirp": "^0.5.1",
     "nasa-keypath": "0.0.1",
     "nightmare": "^3.0.1",
+    "node-fetch": "^2.6.0",
     "request": "^2.85.0",
     "sanitize-filename": "^1.6.1"
   },
