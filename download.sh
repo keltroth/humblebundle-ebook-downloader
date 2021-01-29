@@ -30,7 +30,7 @@ done
 
 mkdir -p ${DOWNLOAD_DIR}
 
-CMD="nodejs ${JS} -f ${FORMAT} -d ${DOWNLOAD_DIR} "
+CMD="node ${JS} -f ${FORMAT} -d ${DOWNLOAD_DIR} "
 
 if [ ! -z "${KEY}" ]
 then

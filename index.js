@@ -47,7 +47,7 @@ const limiter = new Bottleneck({ // Limit concurrent downloads
 
 console.log(colors.green('Starting...'))
 
-function loadConfig (next) {
+function loadConfig(next) {
   fs.access(configPath, (error) => {
     if (error) {
       if (error.code === 'ENOENT') {
@@ -173,7 +173,7 @@ function authenticate (next) {
             return next(error)
           }
 
-          next(null, sessionCookie, commander.key)
+          next(null, sessionCookie.value, commander.key)
         })
       })
       .catch((error) => next(error))
